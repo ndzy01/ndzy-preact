@@ -21,13 +21,11 @@ const View = (props: any) => {
         onClose={() => setState({ open: false })}
       >
         <Preview value={props.detail} />
-        <Space>
-          <Tag color="blue">创建人：{props.userName || '--'}</Tag>
-          <Tag color="green">标签：{props.tagName || '--'}</Tag>
-          <Tag color="red">终止日期：{dayjs(props.deadline).format('YYYY-MM-DD')}</Tag>
-          <Tag>创建日期：{dayjs(props.createdAt).subtract(8, 'h').format('YYYY-MM-DD')}</Tag>
-          <Tag>更新日期：{dayjs(props.updatedAt).subtract(8, 'h').format('YYYY-MM-DD')}</Tag>
-        </Space>
+        <Tag color="blue">创建人：{props.userName || '--'}</Tag>
+        <Tag color="green">标签：{props.tagName || '--'}</Tag>
+        <Tag color="red">终止日期：{dayjs(props.deadline).format('YYYY-MM-DD')}</Tag>
+        <Tag>创建日期：{dayjs(props.createdAt).subtract(8, 'h').format('YYYY-MM-DD')}</Tag>
+        <Tag>更新日期：{dayjs(props.updatedAt).subtract(8, 'h').format('YYYY-MM-DD')}</Tag>
       </Drawer>
     </>
   );

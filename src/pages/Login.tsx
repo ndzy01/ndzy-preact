@@ -5,12 +5,12 @@ import { ReduxContext } from '../redux';
 
 const formItemLayout = {
   labelCol: {
-    xs: { span: 4 },
-    sm: { span: 4 },
+    xs: { span: 6 },
+    sm: { span: 6 },
   },
   wrapperCol: {
-    xs: { span: 20 },
-    sm: { span: 20 },
+    xs: { span: 18 },
+    sm: { span: 18 },
   },
 };
 const buttonItemLayout = { wrapperCol: { span: 14, offset: 2 } };

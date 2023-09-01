@@ -1,5 +1,5 @@
 import { useMount, useVirtualList } from 'ahooks';
-import { Button, Space, Tag, Popconfirm, Spin } from 'antd';
+import { Button, Space, Popconfirm, Spin } from 'antd';
 import { useContext, useRef } from 'preact/hooks';
 import { ReduxContext } from '../redux';
 import { useTodo } from '../hooks';
@@ -46,7 +46,7 @@ const Todo = () => {
                   {ele.data.isFinish === 0 ? (
                     <Space>
                       <View {...ele.data} />
-                      <Tag color="red">处理中</Tag>
+                      <span style={{ color: 'red' }}>处理中</span>
                       <EditTodo title="编辑" {...ele.data} />
                       <Button type="link" onClick={() => finishTodo(ele.data)}>
                         完成
@@ -55,7 +55,7 @@ const Todo = () => {
                   ) : ele.data.isFinish === 1 ? (
                     <Space>
                       <View {...ele.data} />
-                      <Tag color="green">已完成</Tag>
+                      <span style={{ color: 'green' }}>已完成</span>
                       <Button type="link" onClick={() => recoverTodo(ele.data)}>
                         恢复
                       </Button>

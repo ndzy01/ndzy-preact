@@ -1,6 +1,6 @@
 import { useMount, useSetState, useVirtualList } from 'ahooks';
 import { useContext, useRef } from 'preact/hooks';
-import { Button, Space, Popconfirm, Input, Drawer, Tag } from 'antd';
+import { Button, Space, Popconfirm, Input, Drawer } from 'antd';
 import { ReduxContext } from '../redux';
 import { useTodo } from '../hooks';
 
@@ -63,7 +63,7 @@ const ITag = (props: any) => {
                   </div>
                   <div>
                     <Space>
-                      <Tag>创建人：{ele.data.userName || '--'}</Tag>
+                      <span>创建人：{ele.data.userName || '--'}</span>
                     </Space>
                   </div>
                 </div>

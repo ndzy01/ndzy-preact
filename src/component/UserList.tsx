@@ -1,5 +1,5 @@
 import { useMount, useVirtualList } from 'ahooks';
-import { Button, Space, Tag, Popconfirm } from 'antd';
+import { Button, Space, Popconfirm } from 'antd';
 import dayjs from 'dayjs';
 import { useContext, useRef } from 'preact/hooks';
 import { ReduxContext } from '../redux';
@@ -45,8 +45,8 @@ const UserList = () => {
               </div>
               <div>
                 <Space>
-                  <Tag>创建日期：{dayjs(ele.data.createdAt).subtract(8, 'h').format('YYYY-MM-DD')}</Tag>
-                  <Tag>更新日期：{dayjs(ele.data.updatedAt).subtract(8, 'h').format('YYYY-MM-DD')}</Tag>
+                  <span>创建日期：{dayjs(ele.data.createdAt).subtract(8, 'h').format('YYYY-MM-DD')}</span>
+                  <span>更新日期：{dayjs(ele.data.updatedAt).subtract(8, 'h').format('YYYY-MM-DD')}</span>
                 </Space>
               </div>
             </div>

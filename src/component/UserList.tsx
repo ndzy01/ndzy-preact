@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { useMount, useVirtualList } from 'ahooks';
 import { Button, Space, Tag, Popconfirm } from 'antd';
 import dayjs from 'dayjs';

@@ -148,14 +148,14 @@ export const useTodo = () => {
         dispatch({ type: 'UPDATE', payload: { loading: false } });
       });
   };
-  const register = (values: { nickname: string; mobile: string; password: string }) => {
+  const register = (values: { nickname: string; mobile: string; password: string }, cb?: any) => {
     dispatch({ type: 'UPDATE', payload: { loading: true } });
     serviceAxios
       .post('/users/register', { ...values })
       .then((res) => {
         dispatch({ type: 'UPDATE', payload: { loading: false } });
         if (res.status === 0) {
-          goPage('/login');
+          cb && cb();
         }
       })
       .catch(() => {

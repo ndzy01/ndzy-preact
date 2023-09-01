@@ -14,11 +14,11 @@ const formItemLayout = {
   },
 };
 const buttonItemLayout = { wrapperCol: { span: 14, offset: 2 } };
-const Register = () => {
+const Register = ({ onClose }: any) => {
   const { register } = useTodo();
   const { state } = useContext(ReduxContext);
   return (
-    <Form {...formItemLayout} name="register" onFinish={register} scrollToFirstError>
+    <Form {...formItemLayout} name="register" onFinish={(values: any) => register(values, onClose)} scrollToFirstError>
       <Form.Item
         name="nickname"
         label="昵称"

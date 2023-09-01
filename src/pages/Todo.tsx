@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { useMount, useVirtualList } from 'ahooks';
 import { Button, Space, Tag, Popconfirm, Spin } from 'antd';
 import { useContext, useRef } from 'preact/hooks';
@@ -6,7 +5,6 @@ import { ReduxContext } from '../redux';
 import { useTodo } from '../hooks';
 import View from '../component/View';
 import EditTodo from '../component/EditTodo';
-import ITag from '../component/Tag';
 
 const Todo = () => {
   const { state } = useContext(ReduxContext);
@@ -18,7 +16,7 @@ const Todo = () => {
     itemHeight: 60,
     overscan: 10,
   });
-  const { initUser, initTags, goPage, getAllTodo, finishTodo, delTodo, recoverTodo } = useTodo();
+  const { initUser, initTags, getAllTodo, finishTodo, delTodo, recoverTodo } = useTodo();
   useMount(() => {
     initUser();
     initTags();
@@ -27,10 +25,6 @@ const Todo = () => {
 
   return (
     <div>
-      <Space className="mb-16">
-        <EditTodo title="新建待办" />
-        <ITag title="标签管理" />
-      </Space>
       <div className="center">{state.loading && <Spin />}</div>
       <div ref={containerRef} style={{ height: window.innerHeight / 2, overflow: 'auto' }}>
         <div ref={wrapperRef}>

@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { useMount, useSetState, useVirtualList } from 'ahooks';
 import { useContext, useRef } from 'preact/hooks';
 import { Button, Space, Popconfirm, Input, Drawer, Tag } from 'antd';

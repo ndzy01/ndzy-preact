@@ -2,18 +2,8 @@ import { Button, Form, Input } from 'antd';
 import { useContext } from 'preact/hooks';
 import { useTodo } from '../hooks';
 import { ReduxContext } from '../redux';
+import { formItemLayout, buttonItemLayout } from '../utils';
 
-const formItemLayout = {
-  labelCol: {
-    xs: { span: 6 },
-    sm: { span: 6 },
-  },
-  wrapperCol: {
-    xs: { span: 18 },
-    sm: { span: 18 },
-  },
-};
-const buttonItemLayout = { wrapperCol: { span: 14, offset: 2 } };
 const Register = ({ onClose }: any) => {
   const { register } = useTodo();
   const { state } = useContext(ReduxContext);

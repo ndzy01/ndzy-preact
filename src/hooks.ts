@@ -37,7 +37,7 @@ export const useTodo = () => {
   const getAllTodo = (params: { tagId?: string } = {}) => {
     dispatch({ type: 'UPDATE', payload: { loading: true } });
     serviceAxios
-      .get('/todos', { params: { ...params, operationSource: 'h5' } })
+      .get('/todos', { params: { ...params } })
       .then((res) => {
         dispatch({
           type: 'UPDATE',

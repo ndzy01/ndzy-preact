@@ -5,6 +5,7 @@ import { ReduxContext } from '../redux';
 import { useTodo } from '../hooks';
 import View from '../component/View';
 import EditTodo from '../component/EditTodo';
+import Drawer from '../component/Drawer';
 
 const Todo = () => {
   const { state } = useContext(ReduxContext);
@@ -26,6 +27,7 @@ const Todo = () => {
   return (
     <div>
       <div className="center">{state.loading && <Spin />}</div>
+      {list.length === 0 && <div className="center">暂无待办事项</div>}
       <div ref={containerRef} style={{ height: window.innerHeight / 2, overflow: 'auto' }}>
         <div ref={wrapperRef}>
           {list.map((ele) => (
@@ -47,7 +49,9 @@ const Todo = () => {
                     <Space>
                       <View {...ele.data} />
                       <span style={{ color: 'red' }}>处理中</span>
-                      <EditTodo title="编辑" {...ele.data} />
+                      <Drawer title="编辑" btnName="编辑" {...ele.data}>
+                        <EditTodo />
+                      </Drawer>
                       <Button type="link" onClick={() => finishTodo(ele.data)}>
                         完成
                       </Button>

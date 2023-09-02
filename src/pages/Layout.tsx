@@ -20,8 +20,12 @@ const Layout = () => {
       <Header className="ndzy-header">
         <Space className="mb-16">
           {state.user && <div className="sky-blue">{state.user.name}</div>}
-          <EditTodo title="新建待办" />
-          <ITag title="标签管理" />
+          <Drawer title="新建待办" btnName="新建待办">
+            <EditTodo />
+          </Drawer>
+          <Drawer title="标签管理" btnName="标签管理">
+            <ITag />
+          </Drawer>
           <Drawer title="登陆" btnName="登陆">
             <Login />
           </Drawer>

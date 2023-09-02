@@ -19,7 +19,7 @@ const Drawer = ({ title, btnName, children, ...rest }: any) => {
         onClose={() => setState({ open: false })}
       >
         <C onClose={() => setState({ open: false })} {...rest}>
-          {children}
+          {state && children}
         </C>
       </ADrawer>
     </>

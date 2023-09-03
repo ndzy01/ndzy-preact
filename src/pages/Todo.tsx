@@ -5,7 +5,6 @@ import { ReduxContext } from '../redux';
 import { useTodo } from '../hooks';
 import View from '../component/View';
 import EditTodo from '../component/EditTodo';
-import Search from '../component/Search';
 import Drawer from '../component/Drawer';
 
 const Todo = () => {
@@ -28,12 +27,6 @@ const Todo = () => {
   return (
     <div>
       <div className="center">{state.loading && <Spin />}</div>
-      <Drawer title="搜索" btnName="搜索">
-        <Search />
-      </Drawer>
-      <Button type="link" onClick={() => getAllTodo()}>
-        重置
-      </Button>
       {list.length === 0 && <div className="center">暂无待办事项</div>}
       <div ref={containerRef} style={{ height: window.innerHeight / 2, overflow: 'auto' }}>
         <div ref={wrapperRef}>

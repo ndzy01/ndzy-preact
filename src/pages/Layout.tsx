@@ -1,6 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import { useContext } from 'preact/hooks';
-import { Button, Layout as AntLayout, Space } from 'antd';
+import { Button, Layout as AntLayout, Space, Dropdown } from 'antd';
+import type { MenuProps } from 'antd';
 import { ReduxContext } from '../redux';
 import { useTodo } from '../hooks';
 import EditTodo from '../component/EditTodo';
@@ -9,37 +10,81 @@ import Drawer from '../component/Drawer';
 import Login from '../component/Login';
 import Register from '../component/Register';
 import UserList from '../component/UserList';
+import Search from '../component/Search';
 
 const { Header, Content } = AntLayout;
 const Layout = () => {
-  const { signOut } = useTodo();
+  const { signOut, getAllTodo } = useTodo();
   const { state } = useContext(ReduxContext);
+  const items: MenuProps['items'] = [
+    {
+      key: '1',
+      label: (
+        <Drawer title="登陆" btnName="登陆">
+          <Login />
+        </Drawer>
+      ),
+    },
+    {
+      key: '2',
+      label: (
+        <Drawer title="注册" btnName="注册">
+          <Register />
+        </Drawer>
+      ),
+    },
+    {
+      key: '3',
+      label: state.user && state.user.role === '0' && (
+        <Drawer title="用户管理" btnName="用户管理">
+          <UserList />
+        </Drawer>
+      ),
+    },
+    {
+      key: '4',
+      label: (
+        <Button type="link" onClick={signOut}>
+          登出
+        </Button>
+      ),
+    },
+    {
+      key: '5',
+      label: (
+        <Drawer title="搜索" btnName="搜索">
+          <Search />
+        </Drawer>
+      ),
+    },
+    {
+      key: '6',
+      label: (
+        <Button type="link" onClick={() => getAllTodo()}>
+          重置
+        </Button>
+      ),
+    },
+  ];
 
   return (
     <AntLayout className="ndzy-layout">
       <Header className="ndzy-header">
         <Space className="mb-16">
-          {state.user && <div className="sky-blue">{state.user.name}</div>}
+          {state.user && (
+            <div style={{ minWidth: 66 }} className="sky-blue center">
+              {state.user.name}
+            </div>
+          )}
           <Drawer title="新建待办" btnName="新建待办">
             <EditTodo />
           </Drawer>
           <Drawer title="标签管理" btnName="标签管理">
             <ITag />
           </Drawer>
-          <Drawer title="登陆" btnName="登陆">
-            <Login />
-          </Drawer>
-          <Drawer title="注册" btnName="注册">
-            <Register />
-          </Drawer>
-          {state.user && state.user.role === '0' && (
-            <Drawer title="用户管理" btnName="用户管理">
-              <UserList />
-            </Drawer>
-          )}
-          <Button type="link" onClick={signOut}>
-            登出
-          </Button>
+          <Dropdown menu={{ items }}>
+            <a onClick={(e) => e.preventDefault()}>其他</a>
+          </Dropdown>
         </Space>
       </Header>
       <Content>

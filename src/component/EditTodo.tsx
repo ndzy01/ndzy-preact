@@ -17,7 +17,6 @@ const EditTodo = (props: any) => {
         name: props.name,
         deadline: props.deadline ? dayjs(props.deadline) : dayjs(),
         detail: props.detail,
-        link: props.link,
         tagId: props.tagId,
       }}
       preserve={false}
@@ -61,9 +60,6 @@ const EditTodo = (props: any) => {
       >
         <Editor />
       </Form.Item>
-      <Form.Item name="link" label="链接">
-        <Input.TextArea rows={1} />
-      </Form.Item>
       <Form.Item
         name="tagId"
         label="标签"
@@ -78,7 +74,7 @@ const EditTodo = (props: any) => {
       </Form.Item>
       <Form.Item>
         <Button loading={state.loading} type="primary" htmlType="submit">
-          {props.id ? '编辑' : '创建'}
+          {props.id ? '保存' : '创建'}
         </Button>
       </Form.Item>
     </Form>

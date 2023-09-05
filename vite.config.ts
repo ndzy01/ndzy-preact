@@ -2,6 +2,8 @@ import { defineConfig } from 'vite';
 // import { visualizer } from 'rollup-plugin-visualizer';
 import preact from '@preact/preset-vite';
 import viteCompression from 'vite-plugin-compression';
+import reactRefresh from '@vitejs/plugin-react-refresh';
+import { autoComplete, Plugin as importToCDN } from 'vite-plugin-cdn-import';
 
 export default defineConfig({
   build: {
@@ -38,6 +40,21 @@ export default defineConfig({
 
   plugins: [
     preact(),
-    // visualizer({ open: true })
+    importToCDN({
+      modules: [
+        autoComplete('antd'),
+        autoComplete('ahooks'),
+        autoComplete('axios'),
+        autoComplete('crypto-js'),
+        autoComplete('react-router-dom'),
+        // {
+        //   name: 'wangEditor',
+        //   var: '@wangeditor',
+        //   path: `https://cdn.jsdelivr.net/npm/wangeditor@latest/dist/wangEditor.min.js`,
+        // },
+      ],
+    }),
+    reactRefresh(),
+    // visualizer({ open: true }),
   ],
 });

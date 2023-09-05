@@ -11,6 +11,7 @@ const Search = ({ onClose }: any) => {
     <Form
       initialValues={{
         operationSource: 'h5',
+        isFinish: '0',
       }}
       {...formItemLayout}
       name="search"
@@ -35,6 +36,15 @@ const Search = ({ onClose }: any) => {
           options={[
             { label: 'h5', value: 'h5' },
             { label: '微信', value: 'wx' },
+          ]}
+        />
+      </Form.Item>
+      <Form.Item name="isFinish" label="状态">
+        <Select
+          className="w-100"
+          options={[
+            { label: '进行中', value: '0' },
+            { label: '已完成', value: '1' },
           ]}
         />
       </Form.Item>

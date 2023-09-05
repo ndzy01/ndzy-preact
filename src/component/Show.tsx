@@ -9,7 +9,7 @@ const Show = (props: any) => {
         {props.show}
         <p style={{ height: 16, margin: 0 }} onClick={() => setState({ show: !state.show })}></p>
       </div>
-      {state.show && <Preview value={props.detail} />}
+      <div onClick={() => setState({ show: !state.show })}>{state.show && <Preview value={props.detail} />}</div>
     </div>
   );
 };

@@ -29,7 +29,7 @@ const Todo = () => {
     <div>
       <div className="center">{state.loading && <Spin />}</div>
       {list.length === 0 && <div className="center">暂无待办事项</div>}
-      <div ref={containerRef} style={{ height: window.innerHeight / 2, overflow: 'auto' }}>
+      <div ref={containerRef} style={{ height: window.innerHeight * 0.8, overflow: 'auto' }}>
         <div ref={wrapperRef}>
           {list.map((ele) => (
             <div

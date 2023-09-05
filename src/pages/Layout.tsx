@@ -49,22 +49,6 @@ const Layout = () => {
         </Button>
       ),
     },
-    {
-      key: '5',
-      label: (
-        <Drawer title="搜索" btnName="搜索">
-          <Search />
-        </Drawer>
-      ),
-    },
-    {
-      key: '6',
-      label: (
-        <Button type="link" onClick={() => getAllTodo()}>
-          重置
-        </Button>
-      ),
-    },
   ];
 
   return (
@@ -76,12 +60,18 @@ const Layout = () => {
               {state.user.name}
             </div>
           )}
-          <Drawer title="新建待办" btnName="新建待办">
+          <Drawer title="新建" btnName="新建">
             <EditTodo />
           </Drawer>
-          <Drawer title="标签管理" btnName="标签管理">
+          <Drawer title="标签" btnName="标签">
             <ITag />
           </Drawer>
+          <Drawer title="搜索" btnName="搜索">
+            <Search />
+          </Drawer>
+          <Button type="link" onClick={() => getAllTodo()}>
+            重置
+          </Button>
           <Dropdown menu={{ items }}>
             <a onClick={(e) => e.preventDefault()}>其他</a>
           </Dropdown>

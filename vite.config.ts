@@ -2,8 +2,6 @@ import { defineConfig } from 'vite';
 // import { visualizer } from 'rollup-plugin-visualizer';
 import preact from '@preact/preset-vite';
 import viteCompression from 'vite-plugin-compression';
-import reactRefresh from '@vitejs/plugin-react-refresh';
-import { autoComplete, Plugin as importToCDN } from 'vite-plugin-cdn-import';
 
 export default defineConfig({
   build: {
@@ -11,12 +9,12 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks(id) {
-          // if (id.includes('node_modules')) {
-          //   // 让每个插件都打包成独立的文件
-          //   return id.toString().split('node_modules/')[1].split('/')[0].toString();
-          // }
+          if (id.includes('node_modules')) {
+            // 让每个插件都打包成独立的文件
+            return id.toString().split('node_modules/')[1].split('/')[0].toString();
+          }
 
-          return 'vendor';
+          // return 'vendor';
         },
       },
       onwarn(warning, warn) {
@@ -40,16 +38,6 @@ export default defineConfig({
 
   plugins: [
     preact(),
-    importToCDN({
-      modules: [
-        // autoComplete('antd'),
-        autoComplete('ahooks'),
-        autoComplete('axios'),
-        autoComplete('crypto-js'),
-        // autoComplete('react-router-dom'),
-      ],
-    }),
-    reactRefresh(),
     // visualizer({ open: true }),
   ],
 });

@@ -42,16 +42,11 @@ export default defineConfig({
     preact(),
     importToCDN({
       modules: [
-        autoComplete('antd'),
+        // autoComplete('antd'),
         autoComplete('ahooks'),
         autoComplete('axios'),
         autoComplete('crypto-js'),
-        autoComplete('react-router-dom'),
-        // {
-        //   name: 'wangEditor',
-        //   var: '@wangeditor',
-        //   path: `https://cdn.jsdelivr.net/npm/wangeditor@latest/dist/wangEditor.min.js`,
-        // },
+        // autoComplete('react-router-dom'),
       ],
     }),
     reactRefresh(),

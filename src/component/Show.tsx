@@ -2,7 +2,7 @@ import { useSetState } from 'ahooks';
 import Preview from './Preview';
 
 const Show = (props: any) => {
-  const [state, setState] = useSetState({ show: false });
+  const [state, setState] = useSetState({ show: true });
   return (
     <div className="w-100">
       <div className="w-100">

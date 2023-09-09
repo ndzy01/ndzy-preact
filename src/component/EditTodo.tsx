@@ -1,4 +1,4 @@
-import { Button, Input, Form, Select, DatePicker } from 'antd';
+import { Button, Input, Form, Select, DatePicker, Affix } from 'antd';
 import dayjs from 'dayjs';
 import { useContext } from 'preact/hooks';
 import Editor from '../component/Editor';
@@ -73,9 +73,11 @@ const EditTodo = (props: any) => {
         <Select options={state.tags.map((item) => ({ label: `${item.name}-(${item.userName})`, value: item.id }))} />
       </Form.Item>
       <Form.Item>
-        <Button loading={state.loading} type="primary" htmlType="submit">
-          {props.id ? '保存' : '创建'}
-        </Button>
+        <Affix offsetBottom={16}>
+          <Button loading={state.loading} type="primary" htmlType="submit">
+            {props.id ? '保存' : '创建'}
+          </Button>
+        </Affix>
       </Form.Item>
     </Form>
   );

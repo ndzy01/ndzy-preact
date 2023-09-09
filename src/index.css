@@ -7,7 +7,7 @@
   position: sticky;
   background-color: rgba(247, 249, 251, 0.9);
   backdrop-filter: blur(6px);
-  padding: 0 !important;
+  padding: 8px !important;
 }
 
 .ndzy-menu {

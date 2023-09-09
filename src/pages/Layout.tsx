@@ -56,7 +56,7 @@ const Layout = () => {
       <Header className="ndzy-header">
         <Space className="mb-16">
           {state.user && (
-            <div style={{ minWidth: 66 }} className="sky-blue center">
+            <div style={{ minWidth: 33 }} className="sky-blue center">
               {state.user.name}
             </div>
           )}

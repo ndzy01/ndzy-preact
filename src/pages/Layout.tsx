@@ -57,7 +57,7 @@ const Layout = () => {
         <Space className="mb-16">
           {state.user && (
             <div style={{ minWidth: 33 }} className="sky-blue center">
-              {state.user.name}
+              {state.user.name || state.user.nickname}
             </div>
           )}
           <Drawer title="新建" btnName="新建">

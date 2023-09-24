@@ -39,3 +39,7 @@
 .p-16 {
   padding: 16px;
 }
+
+.todo-item:hover {
+  background-color: skyblue;
+}

@@ -6,7 +6,6 @@ import { useTodo } from '../hooks';
 import View from '../component/View';
 import EditTodo from '../component/EditTodo';
 import Drawer from '../component/Drawer';
-import Show from '../component/Show';
 
 const Todo = () => {
   const { state } = useContext(ReduxContext);
@@ -42,39 +41,34 @@ const Todo = () => {
               }}
               key={ele.data.id}
             >
-              <Show
-                detail={ele.data.detail}
-                show={
-                  <div className="between w-100">
-                    <div>{ele.data.name}</div>
-                    <div>
-                      {ele.data.isFinish === 0 ? (
-                        <Space>
-                          <View {...ele.data} />
-                          <span style={{ color: 'red' }}>处理中</span>
-                          <Drawer title="编辑" btnName="编辑" {...ele.data}>
-                            <EditTodo />
-                          </Drawer>
-                          <Button type="link" onClick={() => finishTodo(ele.data)}>
-                            完成
-                          </Button>
-                        </Space>
-                      ) : ele.data.isFinish === 1 ? (
-                        <Space>
-                          <View {...ele.data} />
-                          <span style={{ color: 'green' }}>已完成</span>
-                          <Button type="link" onClick={() => recoverTodo(ele.data)}>
-                            恢复
-                          </Button>
-                          <Popconfirm title="删除将无法恢复,确定删除?" onConfirm={() => delTodo(ele.data)}>
-                            <Button type="link"> 删除</Button>
-                          </Popconfirm>
-                        </Space>
-                      ) : null}
-                    </div>
-                  </div>
-                }
-              />
+              <div className="between w-100 todo-item">
+                <div>{ele.data.name}</div>
+                <div>
+                  {Number(ele.data.isFinish) === 0 ? (
+                    <Space>
+                      <View {...ele.data} />
+                      <span style={{ color: 'red' }}>处理中</span>
+                      <Drawer title="编辑" btnName="编辑" {...ele.data}>
+                        <EditTodo />
+                      </Drawer>
+                      <Button type="link" onClick={() => finishTodo(ele.data)}>
+                        完成
+                      </Button>
+                    </Space>
+                  ) : Number(ele.data.isFinish) === 1 ? (
+                    <Space>
+                      <View {...ele.data} />
+                      <span style={{ color: 'green' }}>已完成</span>
+                      <Button type="link" onClick={() => recoverTodo(ele.data)}>
+                        恢复
+                      </Button>
+                      <Popconfirm title="删除将无法恢复,确定删除?" onConfirm={() => delTodo(ele.data)}>
+                        <Button type="link"> 删除</Button>
+                      </Popconfirm>
+                    </Space>
+                  ) : null}
+                </div>
+              </div>
             </div>
           ))}
         </div>

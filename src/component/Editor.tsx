@@ -1,8 +1,10 @@
 import '@wangeditor/editor/dist/css/style.css'; // 引入 css
 import { useState, useEffect } from 'preact/hooks';
 import { Editor, Toolbar } from '@wangeditor/editor-for-react';
-import { IDomEditor, IEditorConfig, IToolbarConfig } from '@wangeditor/editor';
+import { IDomEditor, IEditorConfig, IToolbarConfig, Boot } from '@wangeditor/editor';
+import markdownModule from '@wangeditor/plugin-md';
 
+Boot.registerModule(markdownModule);
 function MyEditor({ value, onChange }: any) {
   // editor 实例
   const [editor, setEditor] = useState<IDomEditor | null>(null); // TS 语法

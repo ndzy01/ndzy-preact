@@ -27,7 +27,7 @@ export default defineConfig({
           threshold: 10240,
           algorithm: 'gzip',
           ext: '.gz',
-          deleteOriginFile: true,
+          deleteOriginFile: false,
         }),
       ],
     },

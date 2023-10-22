@@ -52,7 +52,7 @@ function MyEditor({ value, onChange }: any) {
             onChange(editor.getHtml());
           }}
           mode="default"
-          style={{ overflowY: 'hidden', minHeight: 120 }}
+          style={{ overflowY: 'hidden', minHeight: 330 }}
         />
       </div>
     </>

@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/ndzy01/img/ndzy.png" />
+    <title>ndzy</title>
+    <script type="module" crossorigin src="/ndzy-preact/assets/index-9b4f5b1f.js"></script>
+    <link rel="modulepreload" crossorigin href="/ndzy-preact/assets/preact-23a6e7b2.js">
+    <link rel="modulepreload" crossorigin href="/ndzy-preact/assets/@remix-run-671dfa1a.js">
+    <link rel="modulepreload" crossorigin href="/ndzy-preact/assets/react-router-5297406e.js">
+    <link rel="modulepreload" crossorigin href="/ndzy-preact/assets/react-router-dom-6a232c9b.js">
+    <link rel="modulepreload" crossorigin href="/ndzy-preact/assets/react-is-e5978b8b.js">
+    <link rel="modulepreload" crossorigin href="/ndzy-preact/assets/@babel-179c1243.js">
+    <link rel="modulepreload" crossorigin href="/ndzy-preact/assets/rc-util-f8219cd0.js">
+    <link rel="modulepreload" crossorigin href="/ndzy-preact/assets/@emotion-c0b5c018.js">
+    <link rel="modulepreload" crossorigin href="/ndzy-preact/assets/stylis-fad5b415.js">
+    <link rel="modulepreload" crossorigin href="/ndzy-preact/assets/classnames-b6baddbd.js">
+    <link rel="modulepreload" crossorigin href="/ndzy-preact/assets/resize-observer-polyfill-0f9f8adb.js">
+    <link rel="modulepreload" crossorigin href="/ndzy-preact/assets/@ctrl-fb5a5473.js">
+    <link rel="modulepreload" crossorigin href="/ndzy-preact/assets/@ant-design-618bfa90.js">
+    <link rel="modulepreload" crossorigin href="/ndzy-preact/assets/rc-resize-observer-34f97b1d.js">
+    <link rel="modulepreload" crossorigin href="/ndzy-preact/assets/rc-motion-746079e2.js">
+    <link rel="modulepreload" crossorigin href="/ndzy-preact/assets/rc-overflow-0bb9126a.js">
+    <link rel="modulepreload" crossorigin href="/ndzy-preact/assets/@rc-component-ae1e168c.js">
+    <link rel="modulepreload" crossorigin href="/ndzy-preact/assets/rc-virtual-list-6db7f7af.js">
+    <link rel="modulepreload" crossorigin href="/ndzy-preact/assets/rc-select-194ce3ad.js">
+    <link rel="modulepreload" crossorigin href="/ndzy-preact/assets/dayjs-8d9e1f51.js">
+    <link rel="modulepreload" crossorigin href="/ndzy-preact/assets/rc-picker-26263728.js">
+    <link rel="modulepreload" crossorigin href="/ndzy-preact/assets/rc-menu-ae608012.js">
+    <link rel="modulepreload" crossorigin href="/ndzy-preact/assets/rc-input-bcebddf2.js">
+    <link rel="modulepreload" crossorigin href="/ndzy-preact/assets/rc-textarea-b691a614.js">
+    <link rel="modulepreload" crossorigin href="/ndzy-preact/assets/rc-drawer-bc94d156.js">
+    <link rel="modulepreload" crossorigin href="/ndzy-preact/assets/rc-dropdown-d049dd0c.js">
+    <link rel="modulepreload" crossorigin href="/ndzy-preact/assets/async-validator-dee29e8b.js">
+    <link rel="modulepreload" crossorigin href="/ndzy-preact/assets/rc-field-form-7389636d.js">
+    <link rel="modulepreload" crossorigin href="/ndzy-preact/assets/throttle-debounce-87e7e444.js">
+    <link rel="modulepreload" crossorigin href="/ndzy-preact/assets/rc-notification-03b87e2a.js">
+    <link rel="modulepreload" crossorigin href="/ndzy-preact/assets/rc-pagination-acfb58ea.js">
+    <link rel="modulepreload" crossorigin href="/ndzy-preact/assets/rc-tooltip-aaf6aa9e.js">
+    <link rel="modulepreload" crossorigin href="/ndzy-preact/assets/antd-743c3251.js">
+    <link rel="modulepreload" crossorigin href="/ndzy-preact/assets/axios-3a76d256.js">
+    <link rel="modulepreload" crossorigin href="/ndzy-preact/assets/crypto-js-49de59d4.js">
+    <link rel="modulepreload" crossorigin href="/ndzy-preact/assets/@wangeditor-555b4898.js">
+    <link rel="modulepreload" crossorigin href="/ndzy-preact/assets/tslib-8b218df4.js">
+    <link rel="modulepreload" crossorigin href="/ndzy-preact/assets/ahooks-49e0bcf3.js">
+    <link rel="stylesheet" href="/ndzy-preact/assets/@wangeditor-501cf061.css">
+    <link rel="stylesheet" href="/ndzy-preact/assets/index-c4ef7724.css">
+  </head>
+  <body>
+    <div id="app"></div>
+    
+    <script>
+      document.documentElement.addEventListener(
+        'touchstart',
+        function (event) {
+          if (event.touches.length > 1) {
+            event.preventDefault();
+          }
+        },
+        false,
+      );
+      let lastTouchEnd = 0;
+      document.documentElement.addEventListener(
+        'touchend',
+        function (event) {
+          const now = Date.now();
+          if (now - lastTouchEnd <= 300) {
+            event.preventDefault();
+          }
+          lastTouchEnd = now;
+        },
+        false,
+      );
+    </script>
+  </body>
+</html>

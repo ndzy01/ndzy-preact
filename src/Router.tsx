@@ -13,7 +13,7 @@ const Router = () => {
     <ConfigProvider locale={zhCn}>
       <ReduxContext.Provider value={{ state, dispatch }}>
         <Routes>
-          <Route path="/" element={<Layout />}>
+          <Route path="/ndzy-preact/" element={<Layout />}>
             <Route index element={<Todo />} />
             <Route path="*" element={<NoMatch />} />
           </Route>

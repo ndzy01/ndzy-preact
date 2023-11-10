@@ -3,6 +3,7 @@ import preact from '@preact/preset-vite';
 import viteCompression from 'vite-plugin-compression';
 
 export default defineConfig({
+  base: '/ndzy-preact/',
   build: {
     chunkSizeWarningLimit: 1024,
     rollupOptions: {

@@ -18,6 +18,14 @@ const Layout = () => {
   const { state } = useContext(ReduxContext);
   const items: MenuProps['items'] = [
     {
+      key: '0',
+      label: (
+        <Drawer title="标签" btnName="标签">
+          <ITag />
+        </Drawer>
+      ),
+    },
+    {
       key: '1',
       label: (
         <Drawer title="登陆" btnName="登陆">
@@ -63,9 +71,7 @@ const Layout = () => {
           <Drawer title="新建" btnName="新建">
             <EditTodo />
           </Drawer>
-          <Drawer title="标签" btnName="标签">
-            <ITag />
-          </Drawer>
+
           <Drawer title="搜索" btnName="搜索">
             <Search />
           </Drawer>

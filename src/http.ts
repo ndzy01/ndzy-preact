@@ -55,8 +55,8 @@ serviceAxios.interceptors.response.use(
           antMsg.error(message);
           break;
         case 401:
-          message = '您未登录，或者登录已经超时，请先登录！';
-          antMsg.error(message);
+          // message = '您未登录，或者登录已经超时，请先登录！';
+          // antMsg.error(message);
           break;
         case 403:
           message = '您没有权限操作！';

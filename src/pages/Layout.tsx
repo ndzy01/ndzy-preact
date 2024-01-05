@@ -63,11 +63,16 @@ const Layout = () => {
     <AntLayout className="ndzy-layout">
       <Header className="ndzy-header">
         <Space className="mb-16">
-          {state.user && (
+          {state.user ? (
             <div style={{ minWidth: 33 }} className="sky-blue center">
               {state.user.name || state.user.nickname}
             </div>
+          ) : (
+            <div style={{ minWidth: 33 }} className="sky-blue center">
+              游客
+            </div>
           )}
+
           <Drawer title="新建" btnName="新建">
             <EditTodo />
           </Drawer>
@@ -75,9 +80,11 @@ const Layout = () => {
           <Drawer title="搜索" btnName="搜索">
             <Search />
           </Drawer>
+
           <Button type="link" onClick={() => getAllTodo()}>
             重置
           </Button>
+
           <Dropdown menu={{ items }}>
             <a onClick={(e) => e.preventDefault()}>其他</a>
           </Dropdown>

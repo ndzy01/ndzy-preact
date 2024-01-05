@@ -129,7 +129,7 @@ export const useTodo = () => {
   };
   const signOut = () => {
     localStorage.setItem('token', '');
-    goPage('/');
+    goPage('/ndzy-preact/');
     window.location.reload();
   };
   const login = (values: { mobile: string; password: string }) => {
@@ -140,7 +140,7 @@ export const useTodo = () => {
         dispatch({ type: 'UPDATE', payload: { loading: false } });
         if (res && res.data && res.data.token) {
           localStorage.setItem('token', res.data.token);
-          goPage('/');
+          goPage('/ndzy-preact/');
           window.location.reload();
         }
       })

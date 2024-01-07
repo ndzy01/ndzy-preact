@@ -58,7 +58,14 @@ export const useTodo = () => {
     dispatch({ type: 'UPDATE', payload: { loading: true } });
     const { text, keyBase, ivBase } = encrypt(values.detail);
     serviceAxios
-      .post('/todos', { ...values, operationSource: 'h5', detail: text, keyBase, ivBase })
+      .post('/todos', {
+        ...values,
+        deadline: dayjs(values.deadline).format('YYYY-MM-DD'),
+        operationSource: 'h5',
+        detail: text,
+        keyBase,
+        ivBase,
+      })
       .then(() => {
         dispatch({ type: 'UPDATE', payload: { loading: false } });
         getAllTodo();

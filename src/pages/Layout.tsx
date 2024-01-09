@@ -14,7 +14,7 @@ import Search from '../component/Search';
 
 const { Header, Content } = AntLayout;
 const Layout = () => {
-  const { signOut, getAllTodo } = useTodo();
+  const { signOut, getAllTodo, switchData, switchService } = useTodo();
   const { state } = useContext(ReduxContext);
   const items: MenuProps['items'] = [
     {
@@ -80,6 +80,14 @@ const Layout = () => {
           <Drawer title="搜索" btnName="搜索">
             <Search />
           </Drawer>
+
+          <Button type="link" onClick={switchService}>
+            {localStorage.getItem('USE_LOCAL_SERVICE') === '0' ? '本地环境' : '线上环境'}
+          </Button>
+
+          <Button type="link" onClick={switchData}>
+            {localStorage.getItem('USE_LOCAL_DATA') === '0' ? '本地数据' : '接口数据'}
+          </Button>
 
           <Button type="link" onClick={() => getAllTodo()}>
             重置

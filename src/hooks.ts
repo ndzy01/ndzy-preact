@@ -3,9 +3,10 @@ import dayjs from 'dayjs';
 import { useContext, useState } from 'preact/hooks';
 import { ReduxContext } from './redux';
 import serviceAxios from './http';
-import { encrypt, decrypt } from './utils';
+import { encrypt, decrypt, generateUUID } from './utils';
 
 export const useTodo = () => {
+  const isLocal = (localStorage.getItem('USE_LOCAL_DATA') || '0') === '0';
   const navigate = useNavigate();
   const { dispatch } = useContext(ReduxContext);
   const [inputValue, setInputValue] = useState('');
@@ -36,66 +37,131 @@ export const useTodo = () => {
   };
   const getAllTodo = (params: { tagId?: string } = {}) => {
     dispatch({ type: 'UPDATE', payload: { loading: true } });
-    serviceAxios
-      .get('/todos', { params: { ...params } })
-      .then((res) => {
-        dispatch({
-          type: 'UPDATE',
-          payload: {
-            list: res.data.map((item: any) => ({
-              ...item,
-              detail: decrypt(item.detail, item.keyBase, item.ivBase),
-            })),
-            loading: false,
-          },
-        });
-      })
-      .catch(() => {
-        dispatch({ type: 'UPDATE', payload: { loading: false } });
+    if (isLocal) {
+      const localData = JSON.parse(localStorage.getItem('DATA') as any);
+      dispatch({
+        type: 'UPDATE',
+        payload: {
+          list: localData.todoList.map((item: any) => ({
+            ...item,
+            detail: decrypt(item.detail, item.keyBase, item.ivBase),
+          })),
+          loading: false,
+        },
       });
+    } else {
+      serviceAxios
+        .get('/todos', { params: { ...params } })
+        .then((res) => {
+          dispatch({
+            type: 'UPDATE',
+            payload: {
+              list: res.data.map((item: any) => ({
+                ...item,
+                detail: decrypt(item.detail, item.keyBase, item.ivBase),
+              })),
+              loading: false,
+            },
+          });
+        })
+        .catch(() => {
+          dispatch({ type: 'UPDATE', payload: { loading: false } });
+        });
+    }
   };
   const createTodo = (values: any, cb?: any) => {
     dispatch({ type: 'UPDATE', payload: { loading: true } });
     const { text, keyBase, ivBase } = encrypt(values.detail);
-    serviceAxios
-      .post('/todos', {
+    if (isLocal) {
+      const localData = JSON.parse(localStorage.getItem('DATA') as any);
+      localData.todoList.push({
+        id: generateUUID(),
         ...values,
         deadline: dayjs(values.deadline).format('YYYY-MM-DD'),
         operationSource: 'h5',
         detail: text,
         keyBase,
         ivBase,
-      })
-      .then(() => {
-        dispatch({ type: 'UPDATE', payload: { loading: false } });
-        getAllTodo();
-        cb && cb();
-      })
-      .catch(() => {
-        dispatch({ type: 'UPDATE', payload: { loading: false } });
+        isLocal: true,
       });
+      localStorage.setItem('DATA', JSON.stringify(localData));
+      dispatch({
+        type: 'UPDATE',
+        payload: {
+          list: localData.todoList,
+          loading: false,
+        },
+      });
+      getAllTodo();
+      cb && cb();
+    } else {
+      serviceAxios
+        .post('/todos', {
+          ...values,
+          deadline: dayjs(values.deadline).format('YYYY-MM-DD'),
+          operationSource: 'h5',
+          detail: text,
+          keyBase,
+          ivBase,
+        })
+        .then(() => {
+          dispatch({ type: 'UPDATE', payload: { loading: false } });
+          getAllTodo();
+          cb && cb();
+        })
+        .catch(() => {
+          dispatch({ type: 'UPDATE', payload: { loading: false } });
+        });
+    }
   };
   const editTodo = (values: any, state: { id: string }, cb?: any) => {
     dispatch({ type: 'UPDATE', payload: { loading: true } });
     const { text, keyBase, ivBase } = encrypt(values.detail);
-    serviceAxios
-      .patch(`/todos/${state.id}`, {
-        name: values.name,
-        detail: text,
-        keyBase,
-        ivBase,
-        link: values.link,
-        deadline: dayjs(values.deadline).format('YYYY-MM-DD'),
-        tagId: values.tagId,
-      })
-      .then(() => {
-        dispatch({ type: 'UPDATE', payload: { loading: false } });
-        getAllTodo();
-        cb && cb();
-      })
-      .catch(() => {
-        dispatch({ type: 'UPDATE', payload: { loading: false } });
+    if (isLocal) {
+      const localData = JSON.parse(localStorage.getItem('DATA') as any);
+      localData.todoList = localData.todoList.map((item) => {
+        if (item.id === state.id) {
+          return {
+            ...item,
+            name: values.name,
+            detail: text,
+            keyBase,
+            ivBase,
+            deadline: dayjs(values.deadline).format('YYYY-MM-DD'),
+            tagId: values.tagId,
+          };
+        }
+        return item;
       });
+      localStorage.setItem('DATA', JSON.stringify(localData));
+      dispatch({
+        type: 'UPDATE',
+        payload: {
+          list: localData.todoList,
+          loading: false,
+        },
+      });
+      getAllTodo();
+      cb && cb();
+    } else {
+      serviceAxios
+        .patch(`/todos/${state.id}`, {
+          name: values.name,
+          detail: text,
+          keyBase,
+          ivBase,
+          deadline: dayjs(values.deadline).format('YYYY-MM-DD'),
+          tagId: values.tagId,
+        })
+        .then(() => {
+          dispatch({ type: 'UPDATE', payload: { loading: false } });
+          getAllTodo();
+          cb && cb();
+        })
+        .catch(() => {
+          dispatch({ type: 'UPDATE', payload: { loading: false } });
+        });
+    }
   };
   const finishTodo = (item: ITodo) => {
     dispatch({ type: 'UPDATE', payload: { loading: true } });
@@ -219,6 +285,22 @@ export const useTodo = () => {
         dispatch({ type: 'UPDATE', payload: { loading: false } });
       });
   };
+  const switchService = () => {
+    if (localStorage.getItem('USE_LOCAL_SERVICE') === '0') {
+      localStorage.setItem('USE_LOCAL_SERVICE', '1');
+    } else {
+      localStorage.setItem('USE_LOCAL_SERVICE', '0');
+    }
+    window.location.reload();
+  };
+  const switchData = () => {
+    if (localStorage.getItem('USE_LOCAL_DATA') === '0') {
+      localStorage.setItem('USE_LOCAL_DATA', '1');
+    } else {
+      localStorage.setItem('USE_LOCAL_DATA', '0');
+    }
+    window.location.reload();
+  };
   return {
     inputValue,
     users,
@@ -239,5 +321,8 @@ export const useTodo = () => {
     setInputValue,
     getUsers,
     delUser,
+    isLocal,
+    switchData,
+    switchService,
   };
 };

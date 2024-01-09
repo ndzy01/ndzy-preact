@@ -1,5 +1,5 @@
 import { useMount, useVirtualList } from 'ahooks';
-import { Button, Space, Popconfirm, Spin } from 'antd';
+import { Button, Space, Popconfirm, Spin, Tag } from 'antd';
 import { useContext, useRef } from 'preact/hooks';
 import { ReduxContext } from '../redux';
 import { useTodo } from '../hooks';
@@ -17,7 +17,7 @@ const Todo = () => {
     itemHeight: 60,
     overscan: 10,
   });
-  const { initUser, initTags, getAllTodo, finishTodo, delTodo, recoverTodo } = useTodo();
+  const { initUser, initTags, getAllTodo, finishTodo, delTodo, recoverTodo, isLocal } = useTodo();
   useMount(() => {
     initUser();
     initTags();
@@ -42,31 +42,48 @@ const Todo = () => {
               key={ele.data.id}
             >
               <div className="between w-100 todo-item">
-                <div>{ele.data.name}</div>
                 <div>
-                  {Number(ele.data.isFinish) === 0 ? (
-                    <Space>
-                      <View {...ele.data} />
-                      <span style={{ color: 'red' }}>处理中</span>
+                  <Space>
+                    {ele.data.name}
+                    <Tag color="pink">{ele.data.deadline}</Tag>
+                    {!isLocal && <Tag color="green">{ele.data.tagName}</Tag>}
+                  </Space>
+                </div>
+                <div>
+                  <Space>
+                    <View {...ele.data} />
+                    {isLocal && (
                       <Drawer title="编辑" btnName="编辑" {...ele.data}>
                         <EditTodo />
                       </Drawer>
-                      <Button type="link" onClick={() => finishTodo(ele.data)}>
-                        完成
+                    )}
+                    {isLocal && (
+                      <Button type="link" onClick={() => {}}>
+                        同步
                       </Button>
-                    </Space>
-                  ) : Number(ele.data.isFinish) === 1 ? (
-                    <Space>
-                      <View {...ele.data} />
-                      <span style={{ color: 'green' }}>已完成</span>
-                      <Button type="link" onClick={() => recoverTodo(ele.data)}>
-                        恢复
-                      </Button>
-                      <Popconfirm title="删除将无法恢复,确定删除?" onConfirm={() => delTodo(ele.data)}>
-                        <Button type="link"> 删除</Button>
-                      </Popconfirm>
-                    </Space>
-                  ) : null}
+                    )}
+                    {Number(ele.data.isFinish) === 0 ? (
+                      <Space>
+                        <span style={{ color: 'red' }}>处理中</span>
+                        <Drawer title="编辑" btnName="编辑" {...ele.data}>
+                          <EditTodo />
+                        </Drawer>
+                        <Button type="link" onClick={() => finishTodo(ele.data)}>
+                          完成
+                        </Button>
+                      </Space>
+                    ) : Number(ele.data.isFinish) === 1 ? (
+                      <Space>
+                        <span style={{ color: 'green' }}>已完成</span>
+                        <Button type="link" onClick={() => recoverTodo(ele.data)}>
+                          恢复
+                        </Button>
+                        <Popconfirm title="删除将无法恢复,确定删除?" onConfirm={() => delTodo(ele.data)}>
+                          <Button type="link"> 删除</Button>
+                        </Popconfirm>
+                      </Space>
+                    ) : null}
+                  </Space>
                 </div>
               </div>
             </div>

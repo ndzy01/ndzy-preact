@@ -6,9 +6,22 @@ antMsg.config({
   duration: 3,
   maxCount: 1,
 });
-// localStorage.setItem('baseURL', 'http://localhost:3000');
-const baseURL = localStorage.getItem('baseURL');
-const url = baseURL ? baseURL : 'https://ndzy-server.vercel.app';
+if (!localStorage.getItem('DATA')) {
+  const data = { todoList: [] };
+  localStorage.setItem('DATA', JSON.stringify(data));
+}
+if (!localStorage.getItem('USE_LOCAL_DATA')) {
+  localStorage.setItem('USE_LOCAL_DATA', '0');
+}
+if (!localStorage.getItem('USE_LOCAL_SERVICE')) {
+  localStorage.setItem('USE_LOCAL_SERVICE', '0');
+}
+if (!localStorage.getItem('BASE_URL')) {
+  localStorage.setItem('BASE_URL', 'http://localhost:3000');
+}
+const baseURL = localStorage.getItem('BASE_URL');
+const isLocalService = (localStorage.getItem('USE_LOCAL_SERVICE') || '0') === '0';
+const url = isLocalService && baseURL ? baseURL : 'https://ndzy-server.vercel.app';
 const serviceAxios = axios.create({
   baseURL: url, // 基础请求地址
   timeout: 60000, // 请求超时设置
